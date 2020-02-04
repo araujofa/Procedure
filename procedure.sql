@@ -1,68 +1,58 @@
---COMANDOS DDL
+use OPTUS;
 
-create procedure CriarTabela
+--CRIAR PROCEDURE 
+
+CREATE PROCEDURE InserirArtista
 as
-create table TestProcedure (
-	IdProcedure int primary key identity,
-	Descricao varchar (255)
-	);
+--inserir codigo sql
+INSERT INTO Artista
+Values('Fabio')
 
-EXECUTE CriarTabela
-Select * from TestProcedure
-DROP TABLE TestProcedure
-DROP PROCEDURE CriarTabela
+--EXECUTA PROCEDURE
 
---COMANDOS DML
+Execute InserirArtista
 
-create procedure InserirArtista
-as
-Insert into Artistas
-Values ('Pac')
+select * from Artista
 
-execute InserirArtista
-
+-- excluir procedure
 drop procedure InserirArtista
 
-create procedure InserirArtista
-@NomeArtista VARCHAR(255)
+CREATE PROCEDURE InserirArtista
+@Nome VARCHAR (255) -- declarar variavel
 as
-Insert into Artistas
-Values (@NomeArtista)
+--inserir codigo sql
+INSERT INTO Artista
+Values(@Nome)
 
-alter procedure InserirArtista
-@NomeArtista VARCHAR(255),
-@Test varchar(255)
+execute InserirArtista 'Vitor'
+
+--alter procedure
+
+alter PROCEDURE InserirArtista
+@Nome VARCHAR (255), -- declarar variavel
+@Qualidade VARCHAR(255)
 as
-Insert into Artistas
-Values (@NomeArtista + @Test)
+--inserir codigo sql
+INSERT INTO Artista
+Values(@Nome + @Qualidade)
 
-execute InserirArtista 'Vitao','Legal'
+execute InserirArtista 'Fabio',' Bonitao'
 
-select * from Artistas
-
-
---COMANDOS DQL
-
-create procedure MaisVisualizacao
-as
-select * from Albuns
-order by Albuns.Visualizacao;
-
-Execute MaisVisualizacao
-
-CREATE PROCEDURE Busca 
-@CampoBusca VARCHAR (20) 
+Create Procedure Busca
+@CampoBusca VARCHAR(20)
 AS
-SELECT * 
-FROM Albuns
-WHERE Albuns.NomeAlbum like '%' + @CampoBusca + '%' 
+Select *
+from Albuns
+WHERE Albuns.Nome like '%' + @CampoBusca + '%'
 
-execute Busca  'f'
+execute busca 'Tropical'
 
+--EXERCICIO RESOLUÇAO
 
+ CREATE PROCEDURE MaisVisualizacao
+ as
+ --codigo sql
+ select * from Albuns
+ Order by Albuns.Visualisacao
 
-
-
-
-
-
+ execute MaisVisualizacao
